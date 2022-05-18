@@ -6,6 +6,7 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue'
+import '../node_modules/bootstrap/dist/css/bootstrap.min.css'
 import ColumnList, { ColumnProps } from './components/ColumnList'
 const dataList: ColumnProps = [
   {
@@ -19,6 +20,24 @@ const dataList: ColumnProps = [
     title: 'React.js',
     avatar: 'https://img.shields.io/badge/react-js-blue.svg',
     description: 'this is react.js'
+  },
+  {
+    id: 3,
+    title: 'Angular.js',
+    avatar: 'https://img.shields.io/badge/angular-js-blue.svg',
+    description: 'this is angular.js'
+  },
+  {
+    id: 4,
+    title: 'Node.js',
+    avatar: 'https://img.shields.io/badge/node.js-blue.svg',
+    description: 'this is node.js'
+  },
+  {
+    id: 5,
+    title: 'PHP',
+    avatar: 'https://img.shields.io/badge/php-blue.svg',
+    description: 'this is php'
   }
 ]
 export default defineComponent({

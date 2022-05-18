@@ -1,13 +1,15 @@
 <template>
-  <div>
-    <ul>
-      <li v-for="column in list" :key="column.id">
-        <img :src="column.avatar" :alt="column.title">
-        <p>{{ column.title }}</p>
-        <p>{{ column.description }}</p>
-        <p>进入专栏</p>
-      </li>
-    </ul>
+  <div class="row">
+    <div v-for="column in list" :key="column.id" class="col-4">
+      <div class="card">
+          <img :src="column.avatar" :alt="column.title">
+          <div class="card-body" >
+            <p class="card-title">{{ column.title }}</p>
+            <p class="card-text">{{ column.description }}</p>
+            <p class="btn btn-primary">进入专栏</p>
+          </div>
+      </div>
+    </div>
   </div>
 </template>
 
