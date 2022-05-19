@@ -21,7 +21,7 @@
           <a href="###">BBBBB</a>
         </dropdown-item>
         <dropdown-item>
-          <a href="###">CCCCCCC</a>
+          <a href="###">CCCCCCC00000</a>
         </dropdown-item>
       </ul>
     </div>
@@ -29,14 +29,15 @@
 </template>
 
 <script lang="ts">
-import { toRef, defineComponent, ref, onMounted, onUnmounted } from 'vue'
+import { defineComponent, ref, watch } from 'vue'
 import DropdownItem from './DropdownItem.vue'
+import useClickOutside from '../hooks/useClickOutside'
 export default defineComponent({
   name: 'Dropdown',
   components: {
     DropdownItem
   },
-  setup(prop) {
+  setup() {
     const isShow = ref(false)
     const toggleHandle = () => {
       isShow.value = !isShow.value
@@ -44,20 +45,13 @@ export default defineComponent({
 
     const dropdownRef = ref<null | HTMLElement>(null)
 
-    const handle = (e: MouseEvent) => {
-      const target = e.target as HTMLElement
-      if (dropdownRef.value) {
-        if (!dropdownRef.value.contains(target) && isShow.value) {
-          isShow.value = false
-        }
-      }
-    }
-    onMounted(() => {
-      document.addEventListener('click', handle)
-    })
+    const isClickOutside = useClickOutside(dropdownRef)
 
-    onUnmounted(() => {
-      document.removeEventListener('click', handle)
+    watch(isClickOutside, () => {
+      console.log('---111222211--', isShow.value, isClickOutside.value)
+      if (isShow.value && isClickOutside.value) {
+        isShow.value = false
+      }
     })
 
     return {
