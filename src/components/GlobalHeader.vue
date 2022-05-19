@@ -1,13 +1,16 @@
 <!--  -->
 <template>
   <div>
-    <div v-if="user.isLogin">
-      {{ user.name }}
-    </div>
-    <div v-else>
-      <div>登录</div>
-      <div>注册</div>
-    </div>
+    <nav class="navbar navbar-dark bg-primary">
+      <a class="navbar-brand" href="#">GG专栏</a>
+      <ul v-if="!user.isLogin" class="list-inline mb-0">
+        <li class="list-inline-item"><a href="##" class="btn btn-outline-light">登录</a></li>
+        <li class="list-inline-item"><a href="##" class="btn btn-outline-light">注册</a></li>
+      </ul>
+      <div v-else class="btn btn-outline-light">
+        {{ user.name }}
+      </div>
+    </nav>
   </div>
 </template>
 

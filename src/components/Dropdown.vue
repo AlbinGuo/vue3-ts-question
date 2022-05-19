@@ -1,7 +1,7 @@
 <!--  -->
 <template>
   <div>
-    <div class="dropdown">
+    <div class="dropdown" style="display: inline-block;" ref="dropdownRef">
       <button @click="toggleHandle"
               class="btn btn-primary dropdown-toggle"
               type="button"
@@ -14,8 +14,14 @@
           class="dropdown-menu"
           style="display: block"
           aria-labelledby="dropdownMenuButton1">
-        <dropdown-item :disable="true">
+        <dropdown-item>
           <a href="###">AAAAaa</a>
+        </dropdown-item>
+        <dropdown-item :disable="true">
+          <a href="###">BBBBB</a>
+        </dropdown-item>
+        <dropdown-item>
+          <a href="###">CCCCCCC</a>
         </dropdown-item>
       </ul>
     </div>
@@ -23,7 +29,7 @@
 </template>
 
 <script lang="ts">
-import { toRef, defineComponent, ref } from 'vue'
+import { toRef, defineComponent, ref, onMounted, onUnmounted } from 'vue'
 import DropdownItem from './DropdownItem.vue'
 export default defineComponent({
   name: 'Dropdown',
@@ -35,9 +41,29 @@ export default defineComponent({
     const toggleHandle = () => {
       isShow.value = !isShow.value
     }
+
+    const dropdownRef = ref<null | HTMLElement>(null)
+
+    const handle = (e: MouseEvent) => {
+      const target = e.target as HTMLElement
+      if (dropdownRef.value) {
+        if (!dropdownRef.value.contains(target) && isShow.value) {
+          isShow.value = false
+        }
+      }
+    }
+    onMounted(() => {
+      document.addEventListener('click', handle)
+    })
+
+    onUnmounted(() => {
+      document.removeEventListener('click', handle)
+    })
+
     return {
       isShow,
-      toggleHandle
+      toggleHandle,
+      dropdownRef
     }
   }
 })

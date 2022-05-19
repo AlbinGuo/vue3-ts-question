@@ -16,7 +16,7 @@ export default defineComponent({
     disable: {
       type: Boolean,
       require: false,
-      default: true
+      default: false
     }
   }
 })
