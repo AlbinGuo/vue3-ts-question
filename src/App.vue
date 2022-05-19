@@ -1,13 +1,23 @@
 <template>
   <div class="container">
-    <column-list :list="list"></column-list>
+    <div>
+      <global-header :user="user"></global-header>
+    </div>
+    <div>
+      <dropdown></dropdown>
+    </div>
+    <div>
+      <column-list :list="list"></column-list>
+    </div>
   </div>
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue'
 import '../node_modules/bootstrap/dist/css/bootstrap.min.css'
-import ColumnList, { ColumnProps } from './components/ColumnList'
+import ColumnList, { ColumnProps } from './components/ColumnList.vue'
+import GlobalHeader, { UserProp } from './components/GlobalHeader.vue'
+import Dropdown from './components/Dropdown.vue'
 const dataList: ColumnProps = [
   {
     id: 1,
@@ -19,14 +29,16 @@ const dataList: ColumnProps = [
   {
     id: 2,
     title: 'React.js',
-    headimg: 'https://img1.baidu.com/it/u=3606169170,2721037717&fm=253&fmt=auto&app=138&f=PNG?w=500&h=500',
+    headimg:
+      'https://img1.baidu.com/it/u=3606169170,2721037717&fm=253&fmt=auto&app=138&f=PNG?w=500&h=500',
     avatar: 'https://img.shields.io/badge/react-js-blue.svg',
     description: 'this is react.js'
   },
   {
     id: 3,
     title: 'Angular.js',
-    headimg: 'https://img0.baidu.com/it/u=2276354322,369264578&fm=253&fmt=auto&app=138&f=JPEG?w=500&h=557',
+    headimg:
+      'https://img0.baidu.com/it/u=2276354322,369264578&fm=253&fmt=auto&app=138&f=JPEG?w=500&h=557',
     avatar: 'https://img.shields.io/badge/angular-js-blue.svg',
     description: 'this is angular.js'
   },
@@ -43,19 +55,26 @@ const dataList: ColumnProps = [
     description: 'this is php'
   }
 ]
+const user: UserProp = {
+  isLogin: true,
+  name: 'guoguo',
+  id: 111
+}
 export default defineComponent({
   name: 'App',
   components: {
-    ColumnList
+    ColumnList,
+    GlobalHeader,
+    Dropdown
   },
   setup() {
     return {
-      list: dataList
+      list: dataList,
+      user: user
     }
   }
 })
 </script>
 
 <style>
-
 </style>
