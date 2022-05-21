@@ -12,7 +12,8 @@
     </div>
 
     <div>
-      <validate-input-2 :rules="rules"></validate-input-2>
+      <validate-input-2 :rules="rules" v-model="emailVal"></validate-input-2>
+      {{emailVal}}
     </div>
 
     <div>
@@ -22,7 +23,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue'
+import { defineComponent, ref } from 'vue'
 import '../node_modules/bootstrap/dist/css/bootstrap.min.css'
 import ColumnList, { ColumnProps } from './components/ColumnList.vue'
 import GlobalHeader, { UserProp } from './components/GlobalHeader.vue'
@@ -82,6 +83,7 @@ export default defineComponent({
     ValidateInput2
   },
   setup() {
+    const emailVal = ref('')
     const rules: RulesProp = [
       { type: 'required', message: '内容不能为空' },
       { type: 'email', message: '邮箱格式不正确' }
@@ -89,7 +91,8 @@ export default defineComponent({
     return {
       list: dataList,
       user,
-      rules
+      rules,
+      emailVal
     }
   }
 })

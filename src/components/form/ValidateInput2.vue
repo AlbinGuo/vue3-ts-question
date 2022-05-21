@@ -3,7 +3,7 @@
     <div class="col-md-6">
       inputRef={{inputRef}}
       <label for="validationServer03" class="form-label">City</label>
-      <input type="text" @blur="validateInput" v-model="inputRef.val" :class="{'is-invalid': inputRef.error}" class="form-control" id="validationServer03" aria-describedby="validationServer03Feedback">
+      <input type="text" @input="updateInput" @blur="validateInput" :class="{'is-invalid': inputRef.error}" class="form-control" id="validationServer03" aria-describedby="validationServer03Feedback">
       <div id="validationServer03Feedback" class="invalid-feedback">
         {{ inputRef.message }}
       </div>
@@ -26,15 +26,23 @@ export default defineComponent({
     rules: {
       type: Array as PropType<RulesProp>,
       default: () => []
-    }
+    },
+    modelValue: String
   },
-  setup (props) {
+  setup (props, context) {
     const emailReg = /^[a-zA-Z0-9_.-]+@[a-zA-Z0-9-]+(\.[a-zA-Z0-9-]+)*\.[a-zA-Z0-9]{2,6}$/
     const inputRef = reactive({
       message: '',
       error: false,
       val: ''
     })
+
+    const updateInput = (e: KeyboardEvent) => {
+      const targetValue = (e.target as HTMLInputElement).value
+      inputRef.val = targetValue
+      context.emit('update:modelValue', targetValue)
+    }
+
     const validateInput = () => {
       if (props.rules) {
         const allPassed = props.rules.every(rule => {
@@ -57,7 +65,8 @@ export default defineComponent({
     }
     return {
       inputRef,
-      validateInput
+      validateInput,
+      updateInput
     }
   }
 })
