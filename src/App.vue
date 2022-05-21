@@ -12,6 +12,10 @@
     </div>
 
     <div>
+      <validate-input-2 :rules="rules"></validate-input-2>
+    </div>
+
+    <div>
       <column-list :list="list"></column-list>
     </div>
   </div>
@@ -24,6 +28,7 @@ import ColumnList, { ColumnProps } from './components/ColumnList.vue'
 import GlobalHeader, { UserProp } from './components/GlobalHeader.vue'
 import Dropdown from './components/Dropdown.vue'
 import ValidateInput from './components/form/ValidateInput.vue'
+import ValidateInput2, { RulesProp } from './components/form/ValidateInput2.vue'
 
 const dataList: ColumnProps = [
   {
@@ -73,12 +78,18 @@ export default defineComponent({
     ColumnList,
     GlobalHeader,
     Dropdown,
-    ValidateInput
+    ValidateInput,
+    ValidateInput2
   },
   setup() {
+    const rules: RulesProp = [
+      { type: 'required', message: '内容不能为空' },
+      { type: 'email', message: '邮箱格式不正确' }
+    ]
     return {
       list: dataList,
-      user: user
+      user,
+      rules
     }
   }
 })
