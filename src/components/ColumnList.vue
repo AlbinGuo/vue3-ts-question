@@ -38,7 +38,6 @@ export default defineComponent({
         return column
       })
     })
-    console.log(columnList)
     return {
       columnList
     }

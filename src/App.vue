@@ -6,6 +6,11 @@
     <div>
       <dropdown></dropdown>
     </div>
+
+    <div>
+      <validate-input></validate-input>
+    </div>
+
     <div>
       <column-list :list="list"></column-list>
     </div>
@@ -18,6 +23,8 @@ import '../node_modules/bootstrap/dist/css/bootstrap.min.css'
 import ColumnList, { ColumnProps } from './components/ColumnList.vue'
 import GlobalHeader, { UserProp } from './components/GlobalHeader.vue'
 import Dropdown from './components/Dropdown.vue'
+import ValidateInput from './components/form/ValidateInput.vue'
+
 const dataList: ColumnProps = [
   {
     id: 1,
@@ -65,7 +72,8 @@ export default defineComponent({
   components: {
     ColumnList,
     GlobalHeader,
-    Dropdown
+    Dropdown,
+    ValidateInput
   },
   setup() {
     return {
